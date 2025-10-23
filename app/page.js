@@ -1,6 +1,6 @@
 
 import Link from 'next/link'
-import TweetCard from '@/components/TweetCard'
+import TweetCard from '../components/TweetCard'
 
 async function getTweets(){
   const res = await fetch("https://dummyjson.com/posts")
