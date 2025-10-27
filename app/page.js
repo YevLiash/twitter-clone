@@ -1,25 +1,23 @@
+import UserNav from '../components/UserNav'
+import UserNavPost from '../components/UserNavPost'
+import TweetsList from '../components/TweetsList'
 
-import Link from 'next/link'
-import TweetCard from '../components/TweetCard'
-
-async function getTweets(){
-  const res = await fetch("https://dummyjson.com/posts")
-  return  res.json()
+async function getTweets() {
+  const res = await fetch('https://dummyjson.com/posts')
+  return res.json()
 }
 
 async function Home() {
   const tweets = await getTweets()
-   console.log(tweets)
+  // console.log(tweets)
 
   return (
-    <main>
-      <ul>
-        {tweets.posts.map((tweet) => (
-          <Link href={`/tweet/${tweet.id}`} key={tweet.id}><TweetCard tweet={tweet} /></Link>
-        ))}
-      </ul>
+    <main className="border border-gray-700 ">
+      <UserNav />
+      <UserNavPost />
+      <TweetsList tweets={tweets} />
     </main>
-  );
+  )
 }
 
 export default Home
