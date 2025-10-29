@@ -4,7 +4,7 @@ import Nav from '../components/Nav.jsx'
 function Header() {
 
   return (
-    <header>
+    <header className="mt-5">
       <FaXTwitter className="text-3xl mb-8" />
       <Nav />
     </header>

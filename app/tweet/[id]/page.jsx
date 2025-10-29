@@ -11,7 +11,9 @@ async function Tweet({params}) {
   const tweet = await getTweet(pageParams.id)
   console.log(tweet)
   return (
+
     <SingleTweet tweet={tweet} />
+
   )
 }
 

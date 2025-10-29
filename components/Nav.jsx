@@ -6,6 +6,8 @@ import {GoBell} from 'react-icons/go'
 import {MdOutlineMail} from 'react-icons/md'
 import {FaRegUser} from 'react-icons/fa'
 import Link from 'next/link'
+import {usePathname} from 'next/navigation'
+
 
 function Nav() {
   const navlinks = [{icon: <IoHome />, name: 'home', href: '/'},
@@ -14,6 +16,8 @@ function Nav() {
     {icon: <MdOutlineMail />, name: 'messages', href: '/messages'},
     {icon: <FaRegUser />, name: 'profile', href: '/profile'}]
 
+  const pathname = usePathname()
+
   return (<ul className="flex flex-col gap-4">
     {navlinks.map(link => {
       return <li
@@ -21,9 +25,9 @@ function Nav() {
       >
         <Link
           href={link.href}
-          className="flex items-center gap-2"
+          className={`flex items-center gap-2 ${pathname === link.href ? 'font-bold text-white' : 'text-gray-300'}`}
         >
-          <span className="text-2xl">{link.icon}</span>
+          <span className="text-2xl ">{link.icon}</span>
           <p className="text-lg capitalize">{link.name}</p>
         </Link>
       </li>
