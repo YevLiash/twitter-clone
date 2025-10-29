@@ -1,3 +1,5 @@
+'use client'
+
 import {IoHome} from 'react-icons/io5'
 import {IoIosSearch} from 'react-icons/io'
 import {GoBell} from 'react-icons/go'
@@ -16,7 +18,6 @@ function Nav() {
     {navlinks.map(link => {
       return <li
         key={link.name}
-
       >
         <Link
           href={link.href}
@@ -25,7 +26,6 @@ function Nav() {
           <span className="text-2xl">{link.icon}</span>
           <p className="text-lg capitalize">{link.name}</p>
         </Link>
-
       </li>
     })}
   </ul>)

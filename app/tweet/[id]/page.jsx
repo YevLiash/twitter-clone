@@ -1,5 +1,4 @@
-import Link from 'next/link'
-import {FaArrowLeftLong} from 'react-icons/fa6'
+import SingleTweet from '../../../components/SingleTweet.jsx'
 
 async function getTweet(id) {
   const res = await fetch(`https://dummyjson.com/posts/${id}`)
@@ -12,16 +11,7 @@ async function Tweet({params}) {
   const tweet = await getTweet(pageParams.id)
   console.log(tweet)
   return (
-    <div>
-      <Link
-        href={'/'}
-        className="flex gap-2 items-center mb-4"
-      >
-        <FaArrowLeftLong />
-        <span>Post</span>
-      </Link>
-      {tweet.body}
-    </div>
+    <SingleTweet tweet={tweet} />
   )
 }
 

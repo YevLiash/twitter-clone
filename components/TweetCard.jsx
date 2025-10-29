@@ -49,14 +49,14 @@ function TweetCard({tweet}) {
 
           <li className="pointer hover:text-green-500 transition">
             <button
-              className="flex items-center gap-1"
+              className="flex items-center gap-1 group"
               onClick={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
                 console.log('repost button clicked')
               }}
             >
-              <div className="p-2.5 rounded-full hover:bg-green-500/10 transition">
+              <div className="p-2.5 rounded-full group-hover:bg-green-500/10 transition">
                 <LuRepeat2 className="text-xl" />
               </div>
               <span className="text-sm ml-[-4px]">{tweet.repost}</span>
@@ -65,14 +65,14 @@ function TweetCard({tweet}) {
 
           <li className="pointer hover:text-pink-500 transition">
             <button
-              className="flex items-center"
+              className="flex items-center group"
               onClick={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
                 setIsLiked(!isLiked)
               }}
             >
-              <div className="p-2.5 rounded-full hover:bg-pink-500/10  transition">
+              <div className="p-2.5 rounded-full group-hover:bg-pink-500/10  transition">
                 {isLiked ? <AiFillHeart className="text-xl" /> :
                   <AiOutlineHeart className="text-xl" />}
               </div>
@@ -82,14 +82,14 @@ function TweetCard({tweet}) {
 
           <li className="pointer hover:text-sky-500 transition">
             <button
-              className="flex items-center pointer"
+              className="flex items-center pointer group"
               onClick={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
                 console.log('views button clicked')
               }}
             >
-              <div className=" p-2.5 rounded-full hover:bg-sky-500/10 transition">
+              <div className=" p-2.5 rounded-full group-hover:bg-sky-500/10 transition">
                 <IoStatsChart className="text-xl" />
               </div>
               <span className="text-sm ml-[-4px] ">{tweet.views}</span>
