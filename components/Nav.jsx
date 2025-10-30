@@ -44,21 +44,24 @@ function Nav() {
 
   const pathname = usePathname()
 
-  return (<ul className="flex flex-col gap-4">
-    {navlinks.map(link => {
-      return <li
-        key={link.name}
-      >
-        <Link
-          href={link.href}
-          className={`flex items-center gap-2 ${pathname === link.href ? 'font-bold text-white' : 'text-gray-300'}`}
-        >
-          <span className="text-2xl ">{pathname === link.href ? link.activeIcon : link.icon}</span>
-          <p className="text-lg capitalize">{link.name}</p>
-        </Link>
-      </li>
-    })}
-  </ul>)
+  return (
+    <nav>
+      <ul className="flex flex-col gap-1">
+        {navlinks.map(link => {
+          return <li
+            key={link.name}
+          >
+            <Link
+              href={link.href}
+              className={`w-fit flex items-center gap-3 px-3 py-2 rounded-full hover:bg-gray-500/30 ${pathname === link.href ? 'font-bold text-white' : 'text-gray-300'}`}
+            >
+              <span className="text-3xl ">{pathname === link.href ? link.activeIcon : link.icon}</span>
+              <p className="text-xl capitalize">{link.name}</p>
+            </Link>
+          </li>
+        })}
+      </ul>
+    </nav>)
 }
 
 export default Nav
