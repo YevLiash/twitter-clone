@@ -1,19 +1,23 @@
 'use client'
 
-import {RiChat3Line} from 'react-icons/ri'
-import {LuRepeat2} from 'react-icons/lu'
+import {RiChat3Line, RiFileGifLine} from 'react-icons/ri'
+import {LuImage, LuRepeat2} from 'react-icons/lu'
 import {AiFillHeart, AiOutlineHeart} from 'react-icons/ai'
 import {FiBookmark} from 'react-icons/fi'
 import {TbShare2} from 'react-icons/tb'
-import {useState} from 'react'
-import {BsDot, BsFillPatchCheckFill} from 'react-icons/bs'
+import {useRef, useState} from 'react'
+import {BsDot, BsEmojiSmile, BsFillPatchCheckFill} from 'react-icons/bs'
 import {FaArrowLeftLong} from 'react-icons/fa6'
 import {IoIosMore} from 'react-icons/io'
 import Link from 'next/link'
+import {GrLocation} from 'react-icons/gr'
 
 function SingleTweet({tweet}) {
   const [isLiked, setIsLiked] = useState(false)
+  const [showReplyIcons, setShowReplyIcons] = useState(false)
   const [reply, setReply] = useState('')
+
+  const imageInputRef = useRef(null)
 
 
   return (
@@ -134,21 +138,52 @@ function SingleTweet({tweet}) {
         </li>
       </ul>
 
-      <div className="flex gap-2 justify-between">
-        <div className="flex gap-3">
-          <div className="w-10 h-10 bg-orange-900 rounded-full flex justify-center items-center ">
-            <span>U</span>
-          </div>
-          <input
-            type="text"
-            value={reply}
-            onChange={e => setReply(e.target.value)}
-            placeholder="Post your reply"
-            className="block border-none outline-none"
-          />
+      <div>
 
+        <div className="flex justify-between">
+          <div className="flex gap-3">
+            <div className="w-10 h-10 bg-orange-900 rounded-full flex justify-center items-center ">
+              <span>U</span>
+            </div>
+
+            <div className="flex flex-col gap-4  ">
+
+              <input
+                type="text"
+                value={reply}
+                onChange={e => setReply(e.target.value)}
+                onFocus={() => setShowReplyIcons(true)}
+                onBlur={() => setShowReplyIcons(false)}
+                placeholder="Post your reply"
+                className="block border-none outline-none ml-2 mt-2"
+              />
+              {showReplyIcons && <ul className="flex items-center gap-4">
+                <li className="flex items-center justify-between text-blue-500 px-2 py-2 rounded-full hover:bg-blue-500/10">
+                  <button onClick={() => imageInputRef.current.click()}>
+                    <LuImage className="text-lg" />
+                  </button>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    ref={imageInputRef}
+                    className="hidden"
+                  />
+                </li>
+                <li className="flex items-center justify-between text-blue-500 px-2 py-2 rounded-full hover:bg-blue-500/10">
+                  <button><RiFileGifLine className="text-lg" /></button>
+                </li>
+                <li className="flex items-center justify-between text-blue-500 px-2 py-2 rounded-full hover:bg-blue-500/10">
+                  <button><BsEmojiSmile className="text-lg" /></button>
+                </li>
+                <li className="flex items-center justify-between text-blue-500 px-2 py-2 rounded-full hover:bg-blue-500/10">
+                  <button><GrLocation className="text-lg" /></button>
+                </li>
+              </ul>}
+            </div>
+          </div>
+
+          <button className={`h-fit mt-auto px-4 py-1.5 font-semibold rounded-full text-gray-900 ${reply === '' ? 'bg-gray-400' : 'bg-white'}`}>Reply</button>
         </div>
-        <button className={`px-4 py-1.5 font-semibold rounded-full text-gray-900 ${reply === '' ? 'bg-gray-400' : 'bg-white'}`}>Reply</button>
       </div>
     </div>
   )

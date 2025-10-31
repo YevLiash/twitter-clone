@@ -53,8 +53,6 @@ function UserNavPost() {
             <li className="flex items-center justify-between text-blue-500 px-2 py-2 rounded-full hover:bg-blue-500/10">
               <button><GrLocation className="text-xl" /></button>
             </li>
-
-
           </ul>
 
           <button className={`px-4 py-1.5 font-semibold rounded-full text-gray-900 ${post === '' ? 'bg-gray-400' : 'bg-white'}`}>Post</button>
