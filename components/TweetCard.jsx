@@ -13,7 +13,7 @@ function TweetCard({tweet}) {
   const [isLiked, setIsLiked] = useState(false)
 
   return (
-    <div className="p-4 border-b border-b-gray-700 flex gap-3">
+    <div className="p-4 border-b sm:border-x  border-gray-700 flex gap-3">
       {tweet.avatar ? <img
           src={tweet.avatar}
           alt="user-avatar"
@@ -25,8 +25,8 @@ function TweetCard({tweet}) {
         </div>}
 
       <div>
-        <div className="mb-3">
-          <div className="flex items-center gap-1">
+        <div>
+          <div className="flex items-center gap-1 mb-3">
             <p>User {tweet.userId}</p>
             <BsFillPatchCheckFill className="text-blue-500" />
             <p className="text-gray-400">@user{tweet.userId}</p>
@@ -37,9 +37,9 @@ function TweetCard({tweet}) {
           <p>{tweet.body}</p>
         </div>
         <ul className="flex justify-between items-center text-gray-500">
-          <li className="pointer hover:text-sky-400 transition">
+          <li className="hover:text-sky-400 transition">
             <button
-              className="flex items-center gap-1"
+              className="flex items-center gap-1 cursor-pointer"
               onClick={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
@@ -53,9 +53,9 @@ function TweetCard({tweet}) {
             </button>
           </li>
 
-          <li className="pointer hover:text-green-500 transition">
+          <li className="hover:text-green-500 transition">
             <button
-              className="flex items-center gap-1 group"
+              className="flex items-center gap-1 group cursor-pointer"
               onClick={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
@@ -69,9 +69,9 @@ function TweetCard({tweet}) {
             </button>
           </li>
 
-          <li className="pointer hover:text-pink-500 transition">
+          <li className="hover:text-pink-500 transition">
             <button
-              className="flex items-center group"
+              className="flex items-center group cursor-pointer"
               onClick={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
@@ -86,9 +86,9 @@ function TweetCard({tweet}) {
             </button>
           </li>
 
-          <li className="pointer hover:text-sky-500 transition">
+          <li className="hover:text-sky-500 transition">
             <button
-              className="flex items-center pointer group"
+              className="flex items-center pointer group cursor-pointer"
               onClick={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
@@ -103,12 +103,12 @@ function TweetCard({tweet}) {
           </li>
 
           <li className="flex items-center gap-3">
-            <button className="pointer">
+            <button className="cursor-pointer">
               <div className=" p-2.5 rounded-full hover:bg-sky-500/10 hover:text-sky-500 transition">
                 <FiBookmark className="text-xl" />
               </div>
             </button>
-            <button className="pointer">
+            <button className="cursor-pointer">
               <div className=" p-2.5 rounded-full hover:bg-sky-500/10 hover:text-sky-500 transition">
                 <TbShare2 className="text-xl" />
               </div>

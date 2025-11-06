@@ -3,7 +3,7 @@ import News from '../components/News'
 
 function RightSide() {
   return (
-    <div className="mt-5 flex flex-col gap-4 min-w-[350px]">
+    <div className="pt-5 flex-col gap-4 hidden lg:flex self-start top-0  ">
       <Search />
       <News />
     </div>

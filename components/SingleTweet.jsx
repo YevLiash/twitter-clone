@@ -75,7 +75,7 @@ function SingleTweet({tweet}) {
       <ul className="py-1 flex justify-between items-center text-gray-500 border-b border-b-gray-700 border-t border-t-gray-700">
         <li className="pointer hover:text-sky-400 transition">
           <button
-            className="flex items-center gap-1"
+            className="flex items-center gap-1 cursor-pointer"
             onClick={(e) => {
               e.preventDefault()
               e.stopPropagation()
@@ -91,7 +91,7 @@ function SingleTweet({tweet}) {
 
         <li className="pointer hover:text-green-500 transition">
           <button
-            className="flex items-center gap-1 group"
+            className="flex items-center gap-1 group cursor-pointer"
             onClick={(e) => {
               e.preventDefault()
               e.stopPropagation()
@@ -107,7 +107,7 @@ function SingleTweet({tweet}) {
 
         <li className="pointer hover:text-pink-500 transition">
           <button
-            className="flex items-center group"
+            className="flex items-center group cursor-pointer"
             onClick={(e) => {
               e.preventDefault()
               e.stopPropagation()
@@ -123,14 +123,14 @@ function SingleTweet({tweet}) {
         </li>
 
         <li className="pointer">
-          <button className="flex items-center">
+          <button className="flex items-center cursor-pointer">
             <div className=" p-2.5 rounded-full hover:bg-sky-500/10 hover:text-sky-500 transition">
               <FiBookmark className="text-xl" />
             </div>
           </button>
         </li>
         <li className="pointer">
-          <button className="flex items-center">
+          <button className="flex items-center cursor-pointer">
             <div className=" p-2.5 rounded-full hover:bg-sky-500/10 hover:text-sky-500 transition">
               <TbShare2 className="text-xl" />
             </div>

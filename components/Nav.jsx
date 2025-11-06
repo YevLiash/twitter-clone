@@ -46,17 +46,17 @@ function Nav() {
 
   return (
     <nav>
-      <ul className="flex flex-col gap-1">
+      <ul className="bg-[#0a0a0a] py-2  border-t-gray-600/30 fixed  bottom-0 left-0 flex justify-around items-center lg:items-start w-full sm:static sm:flex sm:flex-col sm:gap-1">
         {navlinks.map(link => {
           return <li
             key={link.name}
           >
             <Link
               href={link.href}
-              className={`w-fit flex items-center gap-3 px-3 py-2 rounded-full hover:bg-gray-500/30 ${pathname === link.href ? 'font-bold text-white' : 'text-gray-300'}`}
+              className={`w-fit flex items-center gap-3 px-3 py-3 xl:py-2 rounded-full hover:bg-gray-500/30 ${pathname === link.href ? 'font-bold text-white' : 'text-gray-300'}`}
             >
-              <span className="text-3xl ">{pathname === link.href ? link.activeIcon : link.icon}</span>
-              <p className="text-xl capitalize">{link.name}</p>
+              <span className="text-2xl ">{pathname === link.href ? link.activeIcon : link.icon}</span>
+              <p className="hidden xl:block text-xl capitalize">{link.name}</p>
             </Link>
           </li>
         })}
