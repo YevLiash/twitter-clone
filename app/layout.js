@@ -22,7 +22,7 @@ export default function RootLayout({children}) {
   return (
     <html lang="en">
     <body
-      className="max-w-[1240px] mx-auto px-5 flex gap-5"
+      className="max-w-[1240px] mx-auto px-5 flex flex-col sm:grid gap-2 lg:gap-3 xl:gap-5 sm:grid-cols-[72px_1fr] lg:grid-cols-[72px_1fr_350px] xl:grid-cols-[250px_1fr_350px]"
     >
     <Header />
     {children}

@@ -13,7 +13,7 @@ function UserNavPost() {
   const imageInputRef = useRef(null)
 
   return (
-    <div className="flex gap-3 border-b border-b-gray-700 p-4">
+    <div className="flex gap-3 border-b sm:border-x border-gray-700 p-4">
       <div className="min-w-10 h-10 bg-purple-900 rounded-full flex justify-center items-center ">
         <span>U</span>
       </div>

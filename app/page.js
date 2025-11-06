@@ -12,7 +12,7 @@ async function Home() {
   // console.log(tweets)
 
   return (
-    <main className="border-x border-b border-gray-700 ">
+    <main className=" border-b border-gray-700 ">
       <UserNav />
       <UserNavPost />
       <TweetsList tweets={tweets} />
