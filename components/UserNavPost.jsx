@@ -6,11 +6,32 @@ import {RiCalendarScheduleLine, RiFileGifLine} from 'react-icons/ri'
 import {CiCircleList} from 'react-icons/ci'
 import {BsEmojiSmile} from 'react-icons/bs'
 import {GrLocation} from 'react-icons/gr'
+import {useMutation} from '@tanstack/react-query'
 
-function UserNavPost() {
-  const [post, setPost] = useState('')
+function UserNavPost({refetchTweets}) {
+  const [content, setContent] = useState('')
 
   const imageInputRef = useRef(null)
+
+  const mutation = useMutation({
+    mutationFn: async (newTweet) => {
+      const res = await fetch('/api/tweets', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(newTweet)
+      })
+      return res.json()
+    },
+    onSuccess: () => {
+      setContent('')
+      refetchTweets()
+    }
+  })
+
+  async function handlePost() {
+    if (!content.trim()) return
+    mutation.mutate({content})
+  }
 
   return (
     <div className="flex gap-3 border-b sm:border-x border-gray-700 p-4">
@@ -19,8 +40,8 @@ function UserNavPost() {
       </div>
       <div className="mt-2 flex flex-col gap-8 w-full">
         <input
-          value={post}
-          onChange={(e) => setPost(e.target.value)}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
           type="text"
           placeholder="What's happening?"
           className="block border-none outline-none"
@@ -55,7 +76,12 @@ function UserNavPost() {
             </li>
           </ul>
 
-          <button className={`px-4 py-1.5 font-semibold rounded-full text-gray-900 ${post === '' ? 'bg-gray-400' : 'bg-white'}`}>Post</button>
+          <button
+            disabled={content.trim() === ''}
+            onClick={handlePost}
+            className={`px-4 py-1.5 font-semibold rounded-full text-gray-900 ${content.trim() === '' ? 'bg-gray-400' : 'bg-white'}`}
+          >Post
+          </button>
         </div>
       </div>
     </div>

@@ -24,7 +24,7 @@ function TweetCard({tweet}) {
           <span>U</span>
         </div>}
 
-      <div>
+      <div className="w-full">
         <div>
           <div className="flex items-center gap-1 mb-3">
             <p>User {tweet.userId}</p>
@@ -33,10 +33,9 @@ function TweetCard({tweet}) {
             <BsDot className="text-sm inline text-gray-500" />
             <span className="text-gray-500">2h</span>
           </div>
-          <h2>{tweet.title}</h2>
-          <p>{tweet.body}</p>
+          <p>{tweet.content}</p>
         </div>
-        <ul className="flex justify-between items-center text-gray-500">
+        <ul className=" flex justify-between items-center text-gray-500">
           <li className="hover:text-sky-400 transition">
             <button
               className="flex items-center gap-1 cursor-pointer"
@@ -82,7 +81,7 @@ function TweetCard({tweet}) {
                 {isLiked ? <AiFillHeart className="text-xl" /> :
                   <AiOutlineHeart className="text-xl" />}
               </div>
-              <span className="text-sm ml-[-4px]">{tweet.reactions.likes}</span>
+              <span className="text-sm ml-[-4px]">{tweet.reactions?.likes}</span>
             </button>
           </li>
 

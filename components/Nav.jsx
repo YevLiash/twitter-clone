@@ -1,7 +1,6 @@
 'use client'
 
 import {GoBell, GoBellFill, GoHome, GoHomeFill} from 'react-icons/go'
-
 import {FaRegUser, FaUser} from 'react-icons/fa6'
 import Link from 'next/link'
 import {usePathname} from 'next/navigation'
@@ -46,7 +45,7 @@ function Nav() {
 
   return (
     <nav>
-      <ul className="bg-[#0a0a0a] py-2  border-t-gray-600/30 fixed  bottom-0 left-0 flex justify-around items-center lg:items-start w-full sm:static sm:flex sm:flex-col sm:gap-1">
+      <ul className="bg-[#0a0a0a] py-2  border-t-gray-600/30 fixed  bottom-0 left-0 flex justify-around items-center lg:items-start lg:min-w-[182px] w-full sm:static sm:flex sm:flex-col sm:gap-1">
         {navlinks.map(link => {
           return <li
             key={link.name}
