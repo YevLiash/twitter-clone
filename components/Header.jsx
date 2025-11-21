@@ -12,14 +12,16 @@ function Header() {
         <div className="w-fit flex px-2 py-2 rounded-full hover:bg-gray-500/30">
           <Link
             href="/"
+            className="flex "
           >
-            <FaXTwitter className="text-3xl  " />
+            <FaXTwitter className="text-3xl" />
+            <span className="text-xl mt-1.5">-Clone</span>
           </Link>
         </div>
 
         <Nav />
 
-        <button className=" hidden sm:flex items-center w-fit xl:w-auto justify-center p-3 h-fit font-semibold rounded-full text-gray-900 bg-gray-200 hover:bg-gray-300">
+        <button className=" hidden sm:flex items-center w-fit xl:w-auto justify-center p-3 h-fit font-semibold rounded-full text-gray-900 bg-gray-200 hover:bg-gray-300 transition">
           <span className="hidden xl:block">
             Post
           </span>

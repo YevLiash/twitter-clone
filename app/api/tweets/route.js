@@ -1,5 +1,5 @@
 import dbConnect from '../../../lib/mongodb'
-import Tweet from '../../../models/tweet'
+import Tweet from '../../../models/Tweet'
 
 export async function GET() {
   await dbConnect()

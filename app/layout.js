@@ -2,9 +2,10 @@
 
 import {Geist, Geist_Mono} from 'next/font/google'
 import './globals.css'
-import Header from '../components/Header.jsx'
-import RightSide from '../components/RightSide'
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
+import Header from '../components/Header'
+import RightSide from '../components/RightSide'
+import {UserProvider} from '../context/UserContext'
 
 
 const geistSans = Geist({
@@ -30,11 +31,13 @@ export default function RootLayout({children}) {
     <body
       className="max-w-[1240px] mx-auto px-5 flex flex-col sm:grid gap-2 lg:gap-3 xl:gap-5 sm:grid-cols-[72px_1fr] lg:grid-cols-[72px_1fr_350px] xl:grid-cols-[250px_1fr_350px]"
     >
-    <Header />
     <QueryClientProvider client={queryClient}>
-      {children}
+      <UserProvider>
+        <Header />
+        {children}
+        <RightSide />
+      </UserProvider>
     </QueryClientProvider>
-    <RightSide />
     </body>
     </html>
   )
