@@ -10,12 +10,12 @@ export const UserProvider = ({children}) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null
+    const token = localStorage.getItem('token')
 
     if (token) {
       try {
         const decoded = jwt.decode(token)
-        if (decoded?.username) {
+        if (decoded.username) {
           setUser({
             id: decoded.id,
             username: decoded.username,
