@@ -2,9 +2,11 @@
 
 import {useState} from 'react'
 import {useUser} from '../../context/UserContext'
+import {useRouter} from 'next/navigation'
 
 export default function Register() {
   const {setUser} = useUser()
+  const router = useRouter()
   const [form, setForm] = useState({
     username: '',
     email: '',
@@ -27,12 +29,13 @@ export default function Register() {
 
     if (data.success) {
       localStorage.setItem('token', data.token)
-      
+
       setUser({
         username: data.user.username,
         email: data.user.email,
         id: data.user._id
       })
+      router.push('/')
     } else {
       alert(data.message || 'Something went wrong')
     }

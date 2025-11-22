@@ -5,8 +5,6 @@ import UserNavPost from '../components/UserNavPost'
 import TweetsList from '../components/TweetsList'
 import Link from 'next/link'
 import {useUser} from '../context/UserContext'
-import jwt from 'jsonwebtoken'
-import {useEffect} from 'react'
 import {useQuery} from '@tanstack/react-query'
 
 async function getTweets() {
@@ -18,28 +16,18 @@ async function getTweets() {
 }
 
 function Home() {
-  const {user, setUser} = useUser()
+  const {user, loading} = useUser()
 
   const {data, isLoading, isError, refetch} = useQuery({
     queryKey: ['tweets'],
-    queryFn: getTweets
+    queryFn: getTweets,
+    enabled: !!user
   })
 
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token && !user) {
-      try {
-        const decoded = jwt.decode(token)
-        setUser({
-          username: decoded.username,
-          email: decoded.email,
-          id: decoded.id
-        })
-      } catch (error) {
-        console.error('Invalid token', error)
-      }
-    }
-  }, [user, setUser])
+  if (loading) {
+    return <div>Loading...</div>
+  }
+
 
   if (!user) {
     return (
@@ -66,7 +54,9 @@ function Home() {
     )
   }
 
+  if (isLoading) return <div>Loading tweets...</div>
 
+  console.log('DATA FROM API:', data)
   return (
     <>
       <main className=" border-b border-gray-700 ">

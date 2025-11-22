@@ -3,9 +3,11 @@
 import {useState} from 'react'
 import Link from 'next/link'
 import {useUser} from '../../context/UserContext'
+import {useRouter} from 'next/navigation'
 
 export default function Login() {
   const {setUser} = useUser()
+  const router = useRouter()
   const [form, setForm] = useState({
     email: '',
     password: ''
@@ -33,6 +35,8 @@ export default function Login() {
         email: data.data.email,
         id: data.data.id
       })
+      
+      router.push('/')
     } else {
       alert(data.error || 'Something went wrong')
     }
