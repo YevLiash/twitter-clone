@@ -17,7 +17,9 @@ export default function Register() {
     setForm({...form, [e.target.name]: e.target.value})
   }
 
-  async function handleSubmit() {
+  async function handleSubmit(e) {
+    e.preventDefault()
+    
     const res = await fetch('/api/register', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -43,7 +45,10 @@ export default function Register() {
 
   return (
     <main className="flex items-center justify-center">
-      <div className="flex flex-col gap-5 w-[300px] mx-auto">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-5 w-[300px] mx-auto"
+      >
         <input
           name="username"
           placeholder="Username"
@@ -68,12 +73,11 @@ export default function Register() {
         />
 
         <button
-          onClick={handleSubmit}
-          className="bg-blue-500 hover:bg-sky-400 transition px-7 py-3 rounded-full font-semibold"
+          className="text-gray-900 bg-gray-200 hover:bg-gray-300 transition px-7 py-3 rounded-full font-semibold"
         >
           Register
         </button>
-      </div>
+      </form>
     </main>
   )
 }

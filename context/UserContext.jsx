@@ -30,8 +30,13 @@ export const UserProvider = ({children}) => {
     setLoading(false)
   }, [])
 
+  const logout = () => {
+    localStorage.removeItem('token')
+    setUser(null)
+  }
+
   return (
-    <UserContext.Provider value={{user, setUser, loading}}>
+    <UserContext.Provider value={{user, setUser, loading, logout}}>
       {children}
     </UserContext.Provider>
   )

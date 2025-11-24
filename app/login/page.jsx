@@ -17,7 +17,9 @@ export default function Login() {
     setForm({...form, [e.target.name]: e.target.value})
   }
 
-  async function handleSubmit() {
+  async function handleSubmit(e) {
+    e.preventDefault()
+    
     const res = await fetch('/api/login', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -35,7 +37,7 @@ export default function Login() {
         email: data.data.email,
         id: data.data.id
       })
-      
+
       router.push('/')
     } else {
       alert(data.error || 'Something went wrong')
@@ -44,7 +46,10 @@ export default function Login() {
 
   return (
     <main className="flex items-center justify-center">
-      <div className="flex flex-col gap-5 w-[300px] mx-auto">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-5 w-[300px] mx-auto"
+      >
         <h1 className="text-2xl font-bold text-center mb-2">Login</h1>
 
         <input
@@ -65,8 +70,7 @@ export default function Login() {
         />
 
         <button
-          onClick={handleSubmit}
-          className="bg-blue-500 hover:bg-sky-400 transition px-7 py-3 rounded-full font-semibold"
+          className="text-gray-900 bg-gray-200 hover:bg-gray-300 transition px-7 py-3 rounded-full font-semibold"
         >
           Login
         </button>
@@ -75,9 +79,9 @@ export default function Login() {
           href="/register"
           className="mx-auto"
         >
-          Don't have an account? <span className="text-blue-500">Sign up.</span>
+          Don't have an account? <span className="text-blue-400">Sign up.</span>
         </Link>
-      </div>
+      </form>
     </main>
   )
 }
