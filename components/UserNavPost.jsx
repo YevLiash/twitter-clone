@@ -34,7 +34,7 @@ function UserNavPost({refetchTweets}) {
   }
 
   return (
-    <div className="flex gap-3 border-b sm:border-x border-gray-700 p-4">
+    <div className="flex gap-3 border-b sm:border-x border-gray-700 p-2 sm:p-4">
       <div className="min-w-10 h-10 bg-purple-900 rounded-full flex justify-center items-center ">
         <span>U</span>
       </div>
@@ -46,11 +46,11 @@ function UserNavPost({refetchTweets}) {
           placeholder="What's happening?"
           className="block border-none outline-none"
         />
-        <div className="flex items-center justify-between">
-          <ul className="flex items-center gap-4">
+        <div className="ml-[-55px] sm:ml-0 flex items-center justify-between">
+          <ul className="flex items-center gap-1 ">
             <li className="flex items-center justify-between text-blue-500 px-2 py-2 rounded-full hover:bg-blue-500/10">
               <button onClick={() => imageInputRef.current.click()}>
-                <LuImage className="text-xl" />
+                <LuImage className="text-lg lg:text:xl" />
               </button>
               <input
                 type="file"
@@ -62,13 +62,13 @@ function UserNavPost({refetchTweets}) {
             <li className="flex items-center justify-between text-blue-500 px-2 py-2 rounded-full hover:bg-blue-500/10">
               <button><RiFileGifLine className="text-xl" /></button>
             </li>
-            <li className="flex items-center justify-between text-blue-500 px-2 py-2 rounded-full hover:bg-blue-500/10">
+            <li className="hidden sm:flex items-center justify-between text-blue-500 px-2 py-2 rounded-full hover:bg-blue-500/10">
               <button><CiCircleList className="text-xl" /></button>
             </li>
             <li className="flex items-center justify-between text-blue-500 px-2 py-2 rounded-full hover:bg-blue-500/10">
               <button><BsEmojiSmile className="text-xl" /></button>
             </li>
-            <li className="flex items-center justify-between text-blue-500 px-2 py-2 rounded-full hover:bg-blue-500/10">
+            <li className="hidden sm:flex items-center justify-between text-blue-500 px-2 py-2 rounded-full hover:bg-blue-500/10">
               <button><RiCalendarScheduleLine className="text-xl" /></button>
             </li>
             <li className="flex items-center justify-between text-blue-500 px-2 py-2 rounded-full hover:bg-blue-500/10">
@@ -79,7 +79,7 @@ function UserNavPost({refetchTweets}) {
           <button
             disabled={content.trim() === ''}
             onClick={handlePost}
-            className={`px-4 py-1.5 font-semibold rounded-full text-gray-900 ${content.trim() === '' ? 'bg-gray-400' : 'bg-white'}`}
+            className={`px-3 sm:px-4 py-1 sm:py-1.5 font-semibold rounded-full text-gray-900 ${content.trim() === '' ? 'bg-gray-400' : 'bg-white'}`}
           >Post
           </button>
         </div>

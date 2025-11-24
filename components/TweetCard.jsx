@@ -13,7 +13,7 @@ function TweetCard({tweet}) {
   const [isLiked, setIsLiked] = useState(false)
 
   return (
-    <div className="p-4 border-b sm:border-x  border-gray-700 flex gap-3">
+    <div className="p-2 sm:p-4 border-b sm:border-x  border-gray-700 flex gap-1.5 sm:gap-3">
       {tweet.avatar ? <img
           src={tweet.avatar}
           alt="user-avatar"
@@ -24,9 +24,9 @@ function TweetCard({tweet}) {
           <span>U</span>
         </div>}
 
-      <div className="w-full">
+      <div className="w-full flex flex-col gap-2 sm:gap-3">
         <div>
-          <div className="flex items-center gap-1 mb-3">
+          <div className="flex items-center gap-1 mb-2 sm:mb-3">
             <p>User {tweet.userId}</p>
             <BsFillPatchCheckFill className="text-blue-500" />
             <p className="text-gray-400">@user{tweet.userId}</p>
@@ -35,6 +35,7 @@ function TweetCard({tweet}) {
           </div>
           <p>{tweet.content}</p>
         </div>
+
         <ul className=" flex justify-between items-center text-gray-500">
           <li className="hover:text-sky-400 transition">
             <button
@@ -45,7 +46,7 @@ function TweetCard({tweet}) {
                 console.log('reply button clicked')
               }}
             >
-              <div className=" p-2.5 rounded-full hover:bg-sky-500/10 hover:text-sky-500 transition">
+              <div className=" p-1.5 sm:p2.5 rounded-full hover:bg-sky-500/10 hover:text-sky-500 transition">
                 <RiChat3Line className="text-xl " />
               </div>
               <span className="text-sm ml-[-4px]">{tweet.reply}</span>
@@ -61,7 +62,7 @@ function TweetCard({tweet}) {
                 console.log('repost button clicked')
               }}
             >
-              <div className="p-2.5 rounded-full group-hover:bg-green-500/10 transition">
+              <div className="p-1.5 sm:p2.5 rounded-full group-hover:bg-green-500/10 transition">
                 <LuRepeat2 className="text-xl" />
               </div>
               <span className="text-sm ml-[-4px]">{tweet.repost}</span>
@@ -77,7 +78,7 @@ function TweetCard({tweet}) {
                 setIsLiked(!isLiked)
               }}
             >
-              <div className="p-2.5 rounded-full group-hover:bg-pink-500/10  transition">
+              <div className="p-1.5 sm:p2.5 rounded-full group-hover:bg-pink-500/10  transition">
                 {isLiked ? <AiFillHeart className="text-xl" /> :
                   <AiOutlineHeart className="text-xl" />}
               </div>
@@ -94,21 +95,21 @@ function TweetCard({tweet}) {
                 console.log('views button clicked')
               }}
             >
-              <div className=" p-2.5 rounded-full group-hover:bg-sky-500/10 transition">
+              <div className=" p-1.5 sm:p2.5 rounded-full group-hover:bg-sky-500/10 transition">
                 <IoStatsChart className="text-xl" />
               </div>
               <span className="text-sm ml-[-4px] ">{tweet.views}</span>
             </button>
           </li>
 
-          <li className="flex items-center gap-3">
-            <button className="cursor-pointer">
-              <div className=" p-2.5 rounded-full hover:bg-sky-500/10 hover:text-sky-500 transition">
+          <li className="flex items-center sm:gap-3">
+            <button className=" hidden sm:block cursor-pointer">
+              <div className=" p-1.5 sm:p2.5 rounded-full hover:bg-sky-500/10 hover:text-sky-500 transition">
                 <FiBookmark className="text-xl" />
               </div>
             </button>
             <button className="cursor-pointer">
-              <div className=" p-2.5 rounded-full hover:bg-sky-500/10 hover:text-sky-500 transition">
+              <div className=" p-1.5 sm:p2.5 rounded-full hover:bg-sky-500/10 hover:text-sky-500 transition">
                 <TbShare2 className="text-xl" />
               </div>
             </button>

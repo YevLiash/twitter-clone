@@ -28,7 +28,6 @@ function Home() {
     return <div>Loading...</div>
   }
 
-
   if (!user) {
     return (
       <main className="flex flex-col items-center justify-center h-screen text-white">
@@ -58,13 +57,11 @@ function Home() {
 
   console.log('DATA FROM API:', data)
   return (
-    <>
-      <main className=" border-b border-gray-700 ">
-        <UserNav />
-        <UserNavPost refetchTweets={refetch} />
-        <TweetsList tweets={data?.data || []} />
-      </main>
-    </>
+    <main className=" border-b border-gray-700 ">
+      <UserNav />
+      <UserNavPost refetchTweets={refetch} />
+      <TweetsList tweets={data?.data || []} />
+    </main>
   )
 }
 

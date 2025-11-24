@@ -29,7 +29,7 @@ export default function RootLayout({children}) {
   return (
     <html lang="en">
     <body
-      className="max-w-[1240px] mx-auto px-5 flex flex-col sm:grid gap-2 lg:gap-3 xl:gap-5 sm:grid-cols-[72px_1fr] lg:grid-cols-[200px_1fr] xl:grid-cols-[200px_1fr_350px]"
+      className="max-w-[1240px] mx-auto px-1 sm:px-3 lg:px-5 flex flex-col gap-1 sm:grid sm:gap-2 lg:gap-3 xl:gap-5 sm:grid-cols-[72px_1fr] lg:grid-cols-[200px_1fr] xl:grid-cols-[200px_1fr_350px]"
     >
     <QueryClientProvider client={queryClient}>
       <UserProvider>

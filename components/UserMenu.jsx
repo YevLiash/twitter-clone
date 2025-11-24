@@ -35,7 +35,7 @@ function UserMenu() {
       >
         <div className="flex justify-center items-center gap-4 group-hover:bg-gray-500/30 rounded-full">
           <div className="flex items-center ">
-            <div className="flex gap-3 p-3 sm:p-4">
+            <div className="flex gap-3 p-2 sm:p-4">
               <div className="min-w-10 h-10 bg-purple-900 rounded-full flex justify-center items-center ">
                 <span>{user?.username?.charAt(0).toUpperCase()}</span>
               </div>
