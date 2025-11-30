@@ -1,7 +1,6 @@
 'use client'
 
 import {createContext, useContext, useEffect, useState} from 'react'
-import jwt from 'jsonwebtoken'
 
 const UserContext = createContext()
 
@@ -10,29 +9,35 @@ export const UserProvider = ({children}) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
-
-    if (token) {
+    const fetchUser = async () => {
       try {
-        const decoded = jwt.decode(token)
-        if (decoded.username) {
-          setUser({
-            id: decoded.id,
-            username: decoded.username,
-            email: decoded.email
-          })
-        }
+        const res = await fetch('/api/me', {
+          method: 'GET',
+          credentials: 'include'
+        })
+        const data = await res.json()
+        setUser(data.user || null)
       } catch (err) {
-        console.error('Token decode error:', err)
+        console.error('Error fetching user:', err)
+        setUser(null)
+      } finally {
+        setLoading(false)
       }
     }
 
-    setLoading(false)
+    fetchUser()
   }, [])
 
-  const logout = () => {
-    localStorage.removeItem('token')
-    setUser(null)
+  const logout = async () => {
+    try {
+      await fetch('/api/logout', {
+        method: 'POST',
+        credentials: 'include'
+      })
+      setUser(null)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   return (

@@ -7,9 +7,12 @@ import {CiCircleList} from 'react-icons/ci'
 import {BsEmojiSmile} from 'react-icons/bs'
 import {GrLocation} from 'react-icons/gr'
 import {useMutation} from '@tanstack/react-query'
+import {useUser} from '../context/UserContext'
 
 function UserNavPost({refetchTweets}) {
   const [content, setContent] = useState('')
+
+  const {user} = useUser()
 
   const imageInputRef = useRef(null)
 
@@ -30,7 +33,15 @@ function UserNavPost({refetchTweets}) {
 
   async function handlePost() {
     if (!content.trim()) return
-    mutation.mutate({content})
+    if (!user) return
+
+    const newTweet = {
+      content,
+      authorId: user._id,
+      authorUsername: user.username
+    }
+
+    mutation.mutate(newTweet)
   }
 
   return (

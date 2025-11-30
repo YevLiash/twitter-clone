@@ -11,6 +11,9 @@ import {FaArrowLeftLong} from 'react-icons/fa6'
 import {IoIosMore} from 'react-icons/io'
 import Link from 'next/link'
 import {GrLocation} from 'react-icons/gr'
+import UserAvatar from '../components/UserAvatar'
+import {formatDate} from '../utils'
+import {useUser} from '../context/UserContext'
 
 function SingleTweet({tweet}) {
   const [isLiked, setIsLiked] = useState(false)
@@ -19,9 +22,10 @@ function SingleTweet({tweet}) {
 
   const imageInputRef = useRef(null)
 
+  const {user} = useUser()
 
   return (
-    <div className="p-4 border-x border-b border-gray-700 flex flex-col gap-4">
+    <div className="p-2 sm:p-4 border-b sm:border-x  border-gray-700 flex gap-1.5 sm:gap-3 lg:border-x lg:border-b flex-col ">
       <div>
         <Link
           href={'/'}
@@ -34,26 +38,20 @@ function SingleTweet({tweet}) {
 
       <div className="flex items-center justify-between gap-2">
         <div className="flex gap-2  items-center">
-          {tweet.avatar ? <img
-              src={tweet.avatar}
-              alt="user-avatar"
-              width="40px"
-              height="40px"
-            /> :
-            <div className="w-10 h-10 bg-purple-900 rounded-full flex justify-center items-center ">
-              <span>U</span>
-            </div>}
+          <UserAvatar />
           <div>
             <div className="flex items-center gap-1">
-              <span className="font-bold text-white">User {tweet.userId}</span>
+              <span className="font-bold text-white">{tweet.author?.username}</span>
               <BsFillPatchCheckFill className="text-blue-500" />
             </div>
-            <p className="text-gray-400">@user{tweet.userId}</p>
+            <p className="text-gray-400">@{tweet.author?.username}</p>
           </div>
         </div>
 
         <div className="flex  gap-2 items-center">
-          <button className="px-4 py-1.5 font-semibold rounded-full bg-white text-gray-900 hover:bg-gray-300">Subscribe</button>
+          {user._id !== tweet.author.id &&
+            <button className="px-4 py-1.5 font-semibold rounded-full bg-white text-gray-900 hover:bg-gray-300">Subscribe</button>}
+
           <div className=" p-2.5 rounded-full hover:bg-sky-500/10 hover:text-sky-500 transition">
             <IoIosMore className="text-xl" />
           </div>
@@ -62,12 +60,14 @@ function SingleTweet({tweet}) {
 
 
       <div>
-        <h2>{tweet.title}</h2>
-        <p>{tweet.body}</p>
+        <p>{tweet.content}</p>
       </div>
 
       <div className="text-gray-500 flex gap-1 items-center">
-        <p>Time{<BsDot className="text-sm inline" />}
+        <p>{formatDate(tweet.createdAt).time}
+          <BsDot className="text-sm inline" />
+          {formatDate(tweet.createdAt).dayMonthYear}{
+            <BsDot className="text-sm inline" />}
           <span className="text-white font-bold">{tweet.views}</span> Views
         </p>
       </div>
@@ -118,7 +118,7 @@ function SingleTweet({tweet}) {
               {isLiked ? <AiFillHeart className="text-xl" /> :
                 <AiOutlineHeart className="text-xl" />}
             </div>
-            <span className="text-sm ml-[-4px]">{tweet.reactions.likes}</span>
+            <span className="text-sm ml-[-4px]">{tweet.reactions?.likes}</span>
           </button>
         </li>
 
@@ -139,15 +139,10 @@ function SingleTweet({tweet}) {
       </ul>
 
       <div>
-
         <div className="flex justify-between">
-          <div className="flex gap-3">
-            <div className="w-10 h-10 bg-orange-900 rounded-full flex justify-center items-center ">
-              <span>U</span>
-            </div>
-
+          <div className="flex sm:gap-3">
+            <UserAvatar />
             <div className="flex flex-col gap-4  ">
-
               <input
                 type="text"
                 value={reply}
@@ -157,7 +152,7 @@ function SingleTweet({tweet}) {
                 placeholder="Post your reply"
                 className="block border-none outline-none ml-2 mt-2"
               />
-              {showReplyIcons && <ul className="flex items-center gap-4">
+              {showReplyIcons && <ul className="flex items-center gap sm:gap-4">
                 <li className="flex items-center justify-between text-blue-500 px-2 py-2 rounded-full hover:bg-blue-500/10">
                   <button onClick={() => imageInputRef.current.click()}>
                     <LuImage className="text-lg" />

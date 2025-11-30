@@ -41,12 +41,24 @@ export async function POST(req) {
       username: user.username
     }, SECRET, {expiresIn: '7d'})
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: true,
       user: {username: user.username, email: user.email, id: user._id},
       token
     }, {status: 201})
 
+    response.cookies.set({
+      name: 'token',
+      value: token,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7 // 7 days
+    })
+
+    return response
+    
   } catch (error) {
     return NextResponse.json(
       {success: false, message: error.message},

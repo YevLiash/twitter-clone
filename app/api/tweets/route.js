@@ -17,11 +17,30 @@ export async function POST(req) {
   await dbConnect()
 
   try {
-    const body = await req.json()
-    const tweet = await Tweet.create(body)
+    const {content, authorId, authorUsername} = await req.json()
 
-    return Response.json({success: true, data: tweet}, {status: 201})
+    if (!content || !authorId || !authorUsername) {
+      return new Response(JSON.stringify({
+        success: false,
+        error: 'Missing fields'
+      }), {status: 400})
+    }
+
+    const tweet = await Tweet.create({
+      content,
+      author: {
+        id: authorId,
+        username: authorUsername
+      }
+    })
+    return new Response(JSON.stringify({
+      success: true,
+      data: tweet
+    }), {status: 201})
   } catch (error) {
-    return Response.json({success: false, error: error.message}, {status: 400})
+    return new Response(JSON.stringify({
+      success: false,
+      error: error.message
+    }), {status: 400})
   }
 }

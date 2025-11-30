@@ -2,9 +2,8 @@ import mongoose from 'mongoose'
 
 const TweetSchema = new mongoose.Schema({
   author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-    // required: true
+    id: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
+    username: {type: String, required: true}
   },
   content: {
     type: 'String',

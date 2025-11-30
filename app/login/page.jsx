@@ -19,7 +19,7 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    
+
     const res = await fetch('/api/login', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -45,12 +45,12 @@ export default function Login() {
   }
 
   return (
-    <main className="flex items-center justify-center">
+    <main className="flex items-center justify-center h-screen px-6">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-5 w-[300px] mx-auto"
       >
-        <h1 className="text-2xl font-bold text-center mb-2">Login</h1>
+        <h1 className="text-2xl lg:text-4xl font-bold text-center mb-2">Login</h1>
 
         <input
           name="email"

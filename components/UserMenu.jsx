@@ -1,6 +1,7 @@
 import {BsThreeDots} from 'react-icons/bs'
 import {useUser} from '../context/UserContext'
 import {useEffect, useRef, useState} from 'react'
+import UserAvatar from '../components/UserAvatar'
 import Logout from '../components/Logout'
 
 function UserMenu() {
@@ -36,9 +37,7 @@ function UserMenu() {
         <div className="flex justify-center items-center gap-4 group-hover:bg-gray-500/30 rounded-full">
           <div className="flex items-center ">
             <div className="flex gap-3 p-2 sm:p-4">
-              <div className="min-w-10 h-10 bg-purple-900 rounded-full flex justify-center items-center ">
-                <span>{user?.username?.charAt(0).toUpperCase()}</span>
-              </div>
+              <UserAvatar />
             </div>
 
             <div className="hidden lg:flex lg:flex-col max-w-[100px] overflow-hidden text-ellipsis whitespace-nowrap ">
@@ -56,8 +55,10 @@ function UserMenu() {
           logout={logout}
           showLogOut={showLogOut}
           setShowLogOut={setShowLogOut}
-        />}
-      </div>}
+        />
+        }
+      </div>
+      }
 
 
     </div>)

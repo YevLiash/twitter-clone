@@ -40,11 +40,17 @@ export async function POST(req) {
       username: user.username
     }, SECRET, {expiresIn: '7d'})
 
-    return new Response(JSON.stringify({
+    const response = new Response(JSON.stringify({
       success: true,
-      data: {username: user.username, email: user.email, id: user._id},
-      token
+      data: {username: user.username, email: user.email, id: user._id}
     }), {status: 200})
+
+    response.headers.append(
+      'Set-Cookie',
+      `token=${token}; HttpOnly; Path=/; Max-Age=${7 * 24 * 60 * 60}; SameSite=Lax; Secure`
+    )
+
+    return response
 
   } catch (error) {
     return new Response(JSON.stringify({

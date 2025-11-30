@@ -1,18 +1,18 @@
 import SingleTweet from '../../../components/SingleTweet.jsx'
 
 async function getTweet(id) {
-  const res = await fetch(`https://dummyjson.com/posts/${id}`)
+  const res = await fetch(`http://localhost:3000/api/tweets/${id}`)
   return res.json()
 
 }
 
 async function Tweet({params}) {
   const pageParams = await params
-  const tweet = await getTweet(pageParams.id)
-  console.log(tweet)
+  const data = await getTweet(pageParams.id)
+  console.log(data)
   return (
 
-    <SingleTweet tweet={tweet} />
+    <SingleTweet tweet={data.tweet} />
 
   )
 }

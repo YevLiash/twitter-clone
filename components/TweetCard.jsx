@@ -8,30 +8,24 @@ import {IoStatsChart} from 'react-icons/io5'
 import {FiBookmark} from 'react-icons/fi'
 import {TbShare2} from 'react-icons/tb'
 import {BsDot, BsFillPatchCheckFill} from 'react-icons/bs'
+import {timeAgo} from '../utils'
+import UserAvatar from '../components/UserAvatar'
 
 function TweetCard({tweet}) {
   const [isLiked, setIsLiked] = useState(false)
 
   return (
     <div className="p-2 sm:p-4 border-b sm:border-x  border-gray-700 flex gap-1.5 sm:gap-3">
-      {tweet.avatar ? <img
-          src={tweet.avatar}
-          alt="user-avatar"
-          width="40px"
-          height="40px"
-        /> :
-        <div className="min-w-10 h-10 bg-purple-900 rounded-full flex justify-center items-center ">
-          <span>U</span>
-        </div>}
+      <UserAvatar />
 
       <div className="w-full flex flex-col gap-2 sm:gap-3">
         <div>
           <div className="flex items-center gap-1 mb-2 sm:mb-3">
-            <p>User {tweet.userId}</p>
+            <p>{tweet.author?.username}</p>
             <BsFillPatchCheckFill className="text-blue-500" />
-            <p className="text-gray-400">@user{tweet.userId}</p>
+            <p className="text-gray-400">@{tweet.author?.username}</p>
             <BsDot className="text-sm inline text-gray-500" />
-            <span className="text-gray-500">2h</span>
+            <span className="text-gray-500">{timeAgo(tweet.createdAt)}</span>
           </div>
           <p>{tweet.content}</p>
         </div>

@@ -1,11 +1,6 @@
-'use client'
-
 import {Geist, Geist_Mono} from 'next/font/google'
 import './globals.css'
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
-import Header from '../components/Header'
-import RightSide from '../components/RightSide'
-import {UserProvider} from '../context/UserContext'
+import Providers from '../providers/Providers'
 
 
 const geistSans = Geist({
@@ -18,26 +13,20 @@ const geistMono = Geist_Mono({
   subsets: ['latin']
 })
 
-// export const metadata = {
-//   title: 'X Clone',
-//   description: 'X clone'
-// }
+export const metadata = {
+  title: 'X Clone',
+  description: 'X clone'
+}
 
-const queryClient = new QueryClient()
 
 export default function RootLayout({children}) {
   return (
     <html lang="en">
     <body
-      className="max-w-[1240px] mx-auto px-1 sm:px-3 lg:px-5 flex flex-col gap-1 sm:grid sm:gap-2 lg:gap-3 xl:gap-5 sm:grid-cols-[72px_1fr] lg:grid-cols-[200px_1fr] xl:grid-cols-[200px_1fr_350px]"
     >
-    <QueryClientProvider client={queryClient}>
-      <UserProvider>
-        <Header />
-        {children}
-        <RightSide />
-      </UserProvider>
-    </QueryClientProvider>
+    <Providers>
+      {children}
+    </Providers>
     </body>
     </html>
   )
