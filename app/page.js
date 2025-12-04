@@ -9,7 +9,7 @@ import Welcome from '../components/Welcome'
 import Loader from '../components/Loader'
 
 async function getTweets() {
-  const res = await fetch('http://localhost:3000/api/tweets', {
+  const res = await fetch('/api/tweets', {
     method: 'GET',
     cache: 'no-store',
     credentials: 'include'
@@ -41,7 +41,10 @@ function Home() {
     <main className=" border-b border-gray-700 ">
       <UserNav />
       <UserNavPost refetchTweets={refetch} />
-      <TweetsList tweets={data?.data || []} />
+      <TweetsList
+        tweets={data?.data || []}
+        refetchTweets={refetch}
+      />
     </main>
 
 

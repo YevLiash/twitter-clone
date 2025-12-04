@@ -13,6 +13,7 @@ export async function GET() {
   }
 }
 
+
 export async function POST(req) {
   await dbConnect()
 
@@ -31,7 +32,8 @@ export async function POST(req) {
       author: {
         id: authorId,
         username: authorUsername
-      }
+      },
+      liked: []
     })
     return new Response(JSON.stringify({
       success: true,
@@ -44,3 +46,5 @@ export async function POST(req) {
     }), {status: 400})
   }
 }
+
+

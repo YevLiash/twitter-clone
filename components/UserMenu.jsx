@@ -30,26 +30,30 @@ function UserMenu() {
       className=" group"
     >
 
-      {user && <div
-        onClick={() => setShowLogOut(prev => !prev)}
-        className="absolute top-0 left-0 sm:static sm:flex sm:flex-col-reverse   "
-      >
-        <div className="flex justify-center items-center gap-4 group-hover:bg-gray-500/30 rounded-full">
-          <div className="flex items-center ">
-            <div className="flex gap-3 p-2 sm:p-4">
-              <UserAvatar />
-            </div>
+      {user && <div>
 
-            <div className="hidden lg:flex lg:flex-col max-w-[100px] overflow-hidden text-ellipsis whitespace-nowrap ">
-              <span>{user?.username}</span>
-              <span className="text-gray-400">@{user?.username?.toLowerCase()}</span>
+
+        <div
+          onClick={() => setShowLogOut(prev => !prev)}
+          className="absolute top-0 left-0 sm:static sm:flex sm:flex-col-reverse"
+        >
+          <div className="flex justify-center items-center gap-4 group-hover:bg-gray-500/30 rounded-full">
+            <div className="flex items-center ">
+              <div className="flex gap-3 p-2 sm:p-4">
+                <UserAvatar />
+              </div>
+
+              <div className="hidden lg:flex lg:flex-col max-w-[100px] overflow-hidden text-ellipsis whitespace-nowrap ">
+                <span>{user?.username}</span>
+                <span className="text-gray-400">@{user?.username?.toLowerCase()}</span>
+              </div>
+            </div>
+            <div className="hidden lg:flex mr-4">
+              <BsThreeDots className="text-lg" />
             </div>
           </div>
-          <div className="hidden lg:flex mr-4">
-            <BsThreeDots className="text-lg" />
-          </div>
+
         </div>
-
         {showLogOut && <Logout
           user={user}
           logout={logout}

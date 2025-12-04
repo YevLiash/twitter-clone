@@ -18,7 +18,7 @@ function UserNavPost({refetchTweets}) {
 
   const mutation = useMutation({
     mutationFn: async (newTweet) => {
-      const res = await fetch('/api/tweets', {
+      const res = await fetch('http://localhost:3000/api/tweets', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(newTweet)
@@ -56,6 +56,12 @@ function UserNavPost({refetchTweets}) {
           type="text"
           placeholder="What's happening?"
           className="block border-none outline-none"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault()
+              handlePost()
+            }
+          }}
         />
         <div className="ml-[-55px] sm:ml-0 flex items-center justify-between">
           <ul className="flex items-center gap-1 ">

@@ -10,7 +10,7 @@ import {TbMail, TbMailFilled} from 'react-icons/tb'
 import {FaFeatherAlt} from 'react-icons/fa'
 
 
-function Nav() {
+function Nav({scrolled}) {
   const navlinks = [{
     icon: <GoHome />,
     activeIcon: <GoHomeFill />,
@@ -46,7 +46,7 @@ function Nav() {
 
   return (
     <nav>
-      <ul className="bg-[#0a0a0a] py-2  border-t-gray-600/30 fixed  bottom-0 left-0 flex justify-around items-center lg:items-start lg:min-w-[182px] w-full sm:static sm:flex sm:flex-col sm:gap-1">
+      <ul className={`${scrolled ? 'bg-[#0a0a0a]/95' : 'bg-[#0a0a0a]'} py-2  border-t-gray-600/30 fixed  bottom-0 left-0 flex justify-around items-center  w-full sm:static sm:flex sm:flex-col sm:gap-1 lg:items-start lg:min-w-[182px]`}>
         {navlinks.map(link => {
           return <li
             key={link.name}
@@ -60,7 +60,7 @@ function Nav() {
             </Link>
           </li>
         })}
-        
+
         <button className=" hidden mt-3 sm:flex items-center w-fit lg:block lg:w-full justify-center p-3 h-fit font-semibold rounded-full text-gray-900 bg-gray-200 hover:bg-gray-300 transition">
           <span className="hidden lg:block">
             Post

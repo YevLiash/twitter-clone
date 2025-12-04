@@ -1,24 +1,24 @@
 'use client'
 
-import {RiChat3Line, RiFileGifLine} from 'react-icons/ri'
-import {LuImage, LuRepeat2} from 'react-icons/lu'
-import {AiFillHeart, AiOutlineHeart} from 'react-icons/ai'
-import {FiBookmark} from 'react-icons/fi'
-import {TbShare2} from 'react-icons/tb'
+import {RiFileGifLine} from 'react-icons/ri'
+import {LuImage} from 'react-icons/lu'
 import {useRef, useState} from 'react'
 import {BsDot, BsEmojiSmile, BsFillPatchCheckFill} from 'react-icons/bs'
 import {FaArrowLeftLong} from 'react-icons/fa6'
-import {IoIosMore} from 'react-icons/io'
 import Link from 'next/link'
 import {GrLocation} from 'react-icons/gr'
 import UserAvatar from '../components/UserAvatar'
 import {formatDate} from '../utils'
 import {useUser} from '../context/UserContext'
+import TweetActions from '../components/TweetActions'
+import TweetMenu from '../components/TweetMenu'
 
 function SingleTweet({tweet}) {
   const [isLiked, setIsLiked] = useState(false)
   const [showReplyIcons, setShowReplyIcons] = useState(false)
   const [reply, setReply] = useState('')
+  const [showTweetMenu, setShowTweetMenu] = useState(false)
+
 
   const imageInputRef = useRef(null)
 
@@ -49,12 +49,15 @@ function SingleTweet({tweet}) {
         </div>
 
         <div className="flex  gap-2 items-center">
-          {user._id !== tweet.author.id &&
-            <button className="px-4 py-1.5 font-semibold rounded-full bg-white text-gray-900 hover:bg-gray-300">Subscribe</button>}
-
-          <div className=" p-2.5 rounded-full hover:bg-sky-500/10 hover:text-sky-500 transition">
-            <IoIosMore className="text-xl" />
-          </div>
+          {user._id !== tweet.author.id ?
+            (
+              <button className="px-4 py-1.5 font-semibold rounded-full bg-white text-gray-900 hover:bg-gray-300">Subscribe</button>)
+            :
+            (<TweetMenu
+              tweet={tweet}
+              setShowTweetMenu={setShowTweetMenu}
+              showTweetMenu={showTweetMenu}
+            />)}
         </div>
       </div>
 
@@ -72,71 +75,7 @@ function SingleTweet({tweet}) {
         </p>
       </div>
 
-      <ul className="py-1 flex justify-between items-center text-gray-500 border-b border-b-gray-700 border-t border-t-gray-700">
-        <li className="pointer hover:text-sky-400 transition">
-          <button
-            className="flex items-center gap-1 cursor-pointer"
-            onClick={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
-              console.log('reply button clicked')
-            }}
-          >
-            <div className=" p-2.5 rounded-full hover:bg-sky-500/10 hover:text-sky-500 transition">
-              <RiChat3Line className="text-xl " />
-            </div>
-            <span className="text-sm ml-[-4px]">{tweet.reply}</span>
-          </button>
-        </li>
-
-        <li className="pointer hover:text-green-500 transition">
-          <button
-            className="flex items-center gap-1 group cursor-pointer"
-            onClick={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
-              console.log('repost button clicked')
-            }}
-          >
-            <div className="p-2.5 rounded-full group-hover:bg-green-500/10 transition">
-              <LuRepeat2 className="text-xl" />
-            </div>
-            <span className="text-sm ml-[-4px]">{tweet.repost}</span>
-          </button>
-        </li>
-
-        <li className="pointer hover:text-pink-500 transition">
-          <button
-            className="flex items-center group cursor-pointer"
-            onClick={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
-              setIsLiked(!isLiked)
-            }}
-          >
-            <div className="p-2.5 rounded-full group-hover:bg-pink-500/10  transition">
-              {isLiked ? <AiFillHeart className="text-xl" /> :
-                <AiOutlineHeart className="text-xl" />}
-            </div>
-            <span className="text-sm ml-[-4px]">{tweet.reactions?.likes}</span>
-          </button>
-        </li>
-
-        <li className="pointer">
-          <button className="flex items-center cursor-pointer">
-            <div className=" p-2.5 rounded-full hover:bg-sky-500/10 hover:text-sky-500 transition">
-              <FiBookmark className="text-xl" />
-            </div>
-          </button>
-        </li>
-        <li className="pointer">
-          <button className="flex items-center cursor-pointer">
-            <div className=" p-2.5 rounded-full hover:bg-sky-500/10 hover:text-sky-500 transition">
-              <TbShare2 className="text-xl" />
-            </div>
-          </button>
-        </li>
-      </ul>
+      <TweetActions tweet={tweet} />
 
       <div>
         <div className="flex justify-between">

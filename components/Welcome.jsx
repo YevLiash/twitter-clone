@@ -9,6 +9,8 @@ function Welcome() {
         </h1>
 
       </div>
+
+
       <p className="text-2xl ">Do you have an account?</p>
 
       <div className="flex gap-4">
