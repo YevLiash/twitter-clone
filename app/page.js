@@ -29,8 +29,10 @@ function Home() {
   const {data, isLoading, isError, refetch} = useQuery({
     queryKey: ['tweets'],
     queryFn: getTweets,
-    enabled: !!user
+    enabled: !!user,
+    refetchOnMount: true
   })
+
 
   if (isLoading) return <Loader />
 

@@ -7,7 +7,6 @@ import {usePathname} from 'next/navigation'
 import {CiSearch} from 'react-icons/ci'
 import {IoSearch} from 'react-icons/io5'
 import {TbMail, TbMailFilled} from 'react-icons/tb'
-import {FaFeatherAlt} from 'react-icons/fa'
 
 
 function Nav({scrolled}) {
@@ -60,13 +59,7 @@ function Nav({scrolled}) {
             </Link>
           </li>
         })}
-
-        <button className=" hidden mt-3 sm:flex items-center w-fit lg:block lg:w-full justify-center p-3 h-fit font-semibold rounded-full text-gray-900 bg-gray-200 hover:bg-gray-300 transition">
-          <span className="hidden lg:block">
-            Post
-          </span>
-          <FaFeatherAlt className="inline-block text-2xl w-fit lg:hidden" />
-        </button>
+        
       </ul>
     </nav>)
 }

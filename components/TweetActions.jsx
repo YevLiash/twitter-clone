@@ -6,13 +6,16 @@ import {FiBookmark} from 'react-icons/fi'
 import {TbShare2} from 'react-icons/tb'
 import {useEffect, useState} from 'react'
 import {useUser} from '../context/UserContext'
+import {useQueryClient} from '@tanstack/react-query'
 
 function TweetActions({tweet}) {
   const {user} = useUser()
   const currentUserId = user?._id
   const [likedUsers, setLikedUsers] = useState(tweet.liked || [])
+
   const liked = currentUserId ? likedUsers.includes(currentUserId) : false
   const [isLiked, setIsLiked] = useState(false)
+  const queryClient = useQueryClient()
 
   //LIKES
   const handleLike = async (e) => {
@@ -25,8 +28,22 @@ function TweetActions({tweet}) {
       : [...likedUsers, currentUserId]
     setLikedUsers(newLiked)
 
+    queryClient.setQueryData(['tweet', tweet._id], old => ({
+      ...old,
+      liked: newLiked
+    }))
+
+    queryClient.setQueryData(['tweets'], old => {
+      if (!old) return old
+      return {
+        ...old,
+        data: old.data.map(t =>
+          t._id === tweet._id ? {...t, liked: newLiked} : t
+        )
+      }
+    })
+
     try {
-      console.log('test')
       const res = await fetch(`http://localhost:3000/api/tweets/${tweet._id}/like`, {
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},

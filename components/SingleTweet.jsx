@@ -3,7 +3,6 @@
 import {useRef, useState} from 'react'
 import {BsDot, BsEmojiSmile, BsFillPatchCheckFill} from 'react-icons/bs'
 import {FaArrowLeftLong} from 'react-icons/fa6'
-import Link from 'next/link'
 import UserAvatar from '../components/UserAvatar'
 import {formatDate} from '../utils'
 import {useUser} from '../context/UserContext'
@@ -12,13 +11,14 @@ import TweetMenu from '../components/TweetMenu'
 import {LuImage} from 'react-icons/lu'
 import {RiFileGifLine} from 'react-icons/ri'
 import {GrLocation} from 'react-icons/gr'
+import {useRouter} from 'next/navigation'
 
 function SingleTweet({tweet}) {
   const [isLiked, setIsLiked] = useState(false)
   const [showReplyIcons, setShowReplyIcons] = useState(false)
   const [reply, setReply] = useState('')
 
-
+  const router = useRouter()
   const imageInputRef = useRef(null)
 
   const textareaRef = useRef(null)
@@ -32,13 +32,15 @@ function SingleTweet({tweet}) {
   return (
     <div className="p-2 sm:p-4 border-b sm:border-x  border-gray-700 flex gap-1.5 sm:gap-3 lg:border-x lg:border-b flex-col ">
       <div>
-        <Link
-          href={'/'}
-          className="flex gap-8 items-center"
+        <button
+          onClick={() => {
+            router.push('/')
+          }}
+          className="cursor-pointer flex gap-8 items-center"
         >
           <FaArrowLeftLong />
           <span className="font-bold text-lg">Posts</span>
-        </Link>
+        </button>
       </div>
 
       <div className="flex items-center justify-between gap-2">
