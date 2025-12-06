@@ -54,14 +54,16 @@ function UserNavPost({refetchTweets}) {
   return (
     <div className="flex gap-3 border-b sm:border-x border-gray-700 p-2 sm:p-4">
       <UserAvatar />
-      <div className="mt-2 flex flex-col gap-8 w-full">
+      <div className="mt-2 flex flex-col gap-3 w-full">
+        <div>
         <textarea
           rows={1}
           value={content}
+          maxLength={300}
           ref={textareaRef}
           onInput={handleInput}
           placeholder="What's happening?"
-          className="resize-none block border-none outline-none"
+          className=" w-full resize-none block border-none outline-none"
           onChange={(e) => setContent(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
@@ -70,6 +72,10 @@ function UserNavPost({refetchTweets}) {
             }
           }}
         />
+          <div className="text-right mr-2 sm:mr-3 text-gray-400/50 text-xs">
+            {content.length} / 300
+          </div>
+        </div>
         <div className="ml-[-55px] sm:ml-0 flex items-center justify-between">
           <ul className="flex items-center gap-1 ">
             <li className="flex items-center justify-between text-blue-500 px-2 py-2 rounded-full hover:bg-blue-500/10">
