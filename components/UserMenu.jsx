@@ -29,17 +29,14 @@ function UserMenu() {
       ref={logOutRef}
       className=" group"
     >
-
       {user && <div>
-
-
         <div
           onClick={() => setShowLogOut(prev => !prev)}
           className="absolute top-0 left-0 sm:static sm:flex sm:flex-col-reverse"
         >
           <div className="flex justify-center items-center gap-4 group-hover:bg-gray-500/30 rounded-full">
             <div className="flex items-center ">
-              <div className="flex gap-3 p-2 sm:p-4">
+              <div className="flex gap-3 p-3 sm:p-2">
                 <UserAvatar />
               </div>
 

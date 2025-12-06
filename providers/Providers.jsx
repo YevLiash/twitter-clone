@@ -13,11 +13,9 @@ export default function Providers({children}) {
   return (
     <QueryClientProvider client={queryClient}>
       <UserProvider>
-
         <InnerLayout>
           {children}
         </InnerLayout>
-
       </UserProvider>
     </QueryClientProvider>
   )

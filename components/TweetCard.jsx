@@ -4,15 +4,12 @@ import {BsDot, BsFillPatchCheckFill} from 'react-icons/bs'
 import {timeAgo} from '../utils'
 import UserAvatar from '../components/UserAvatar'
 import {useUser} from '../context/UserContext'
-import {useState} from 'react'
 import TweetActions from '../components/TweetActions'
 import TweetMenu from '../components/TweetMenu'
 
 function TweetCard({tweet, refetchTweets}) {
   const {user} = useUser()
   const currentUserId = user?._id
-
-  const [showTweetMenu, setShowTweetMenu] = useState(false)
 
   return (
     <div className="p-2 sm:p-4 border-b sm:border-x  border-gray-700 flex gap-1.5 sm:gap-3">
@@ -31,8 +28,7 @@ function TweetCard({tweet, refetchTweets}) {
             <div>
               {currentUserId === tweet?.author.id && <TweetMenu
                 tweet={tweet}
-                setShowTweetMenu={setShowTweetMenu}
-                showTweetMenu={showTweetMenu}
+                refetchTweets={refetchTweets}
               />}
             </div>
 

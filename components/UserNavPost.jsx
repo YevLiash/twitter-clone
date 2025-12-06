@@ -8,9 +8,16 @@ import {BsEmojiSmile} from 'react-icons/bs'
 import {GrLocation} from 'react-icons/gr'
 import {useMutation} from '@tanstack/react-query'
 import {useUser} from '../context/UserContext'
+import UserAvatar from '../components/UserAvatar'
 
 function UserNavPost({refetchTweets}) {
   const [content, setContent] = useState('')
+
+  const textareaRef = useRef(null)
+  const handleInput = () => {
+    textareaRef.current.style.height = 'auto'
+    textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px'
+  }
 
   const {user} = useUser()
 
@@ -46,16 +53,16 @@ function UserNavPost({refetchTweets}) {
 
   return (
     <div className="flex gap-3 border-b sm:border-x border-gray-700 p-2 sm:p-4">
-      <div className="min-w-10 h-10 bg-purple-900 rounded-full flex justify-center items-center ">
-        <span>U</span>
-      </div>
+      <UserAvatar />
       <div className="mt-2 flex flex-col gap-8 w-full">
-        <input
+        <textarea
+          rows={1}
           value={content}
-          onChange={(e) => setContent(e.target.value)}
-          type="text"
+          ref={textareaRef}
+          onInput={handleInput}
           placeholder="What's happening?"
-          className="block border-none outline-none"
+          className="resize-none block border-none outline-none"
+          onChange={(e) => setContent(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault()
@@ -96,7 +103,7 @@ function UserNavPost({refetchTweets}) {
           <button
             disabled={content.trim() === ''}
             onClick={handlePost}
-            className={`px-3 sm:px-4 py-1 sm:py-1.5 font-semibold rounded-full text-gray-900 ${content.trim() === '' ? 'bg-gray-400' : 'bg-white'}`}
+            className={`px-3 sm:px-4 py-1 sm:py-1.5 font-semibold rounded-full text-gray-900 ${content.trim() === '' ? 'bg-gray-400' : 'bg-white'} hover:bg-gray-300`}
           >Post
           </button>
         </div>

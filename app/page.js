@@ -36,8 +36,6 @@ function Home() {
 
   console.log('DATA FROM API:', data)
   return (
-
-
     <main className=" border-b border-gray-700 ">
       <UserNav />
       <UserNavPost refetchTweets={refetch} />

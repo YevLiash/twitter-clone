@@ -30,7 +30,7 @@ export async function GET(req, {params}) {
 
 export async function DELETE(req, {params}) {
   await dbConnect()
-  
+
   const {id} = await params
 
   try {
@@ -62,5 +62,35 @@ export async function DELETE(req, {params}) {
       success: false,
       error: error.message
     }), {status: 400})
+  }
+}
+
+export async function PATCH(req, {params}) {
+  const pageParams = await params
+  const {id} = await pageParams
+  console.log('edit id', id)
+  try {
+    await dbConnect()
+    const body = await req.json()
+    const {content} = body
+
+    if (!content) {
+      return new Response(JSON.stringify({error: 'Content is required'}), {status: 400})
+    }
+
+    const updatedTweet = await Tweet.findByIdAndUpdate(
+      id,
+      {content},
+      {new: true}
+    )
+
+    if (!updatedTweet) {
+      return new Response(JSON.stringify({error: 'Tweet not found'}), {status: 404})
+    }
+
+    return new Response(JSON.stringify(updatedTweet), {status: 200})
+  } catch (error) {
+    console.error(error)
+    return new Response(JSON.stringify({error: 'Server error'}), {status: 500})
   }
 }

@@ -1,13 +1,23 @@
-import {useEffect, useRef} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import {BsThreeDots} from 'react-icons/bs'
+import EditTweetModal from '../components/EditTweetModal'
+import DeleteTweetModal from '../components/DeleteTweetModal'
+import {useRouter} from 'next/navigation'
+import {FaRegEdit, FaRegTrashAlt} from 'react-icons/fa'
 
-function TweetMenu({tweet, refetchTweets, setShowTweetMenu, showTweetMenu}) {
+function TweetMenu({tweet, refetchTweets}) {
 
   const TweetMenuRef = useRef(null)
+  const [showTweetMenu, setShowTweetMenu] = useState(false)
+  const [showEditModal, setShowEditModal] = useState(false)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+
+  const router = useRouter()
+
 
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (TweetMenuRef.current && !TweetMenuRef.current.contains(event.target)) {
+    function handleClickOutside(e) {
+      if (TweetMenuRef.current && !TweetMenuRef.current.contains(e.target)) {
         setShowTweetMenu(false)
       }
     }
@@ -16,13 +26,9 @@ function TweetMenu({tweet, refetchTweets, setShowTweetMenu, showTweetMenu}) {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  useEffect(() => {
-    setShowTweetMenu(false)
-  }, [])
 
   //DELETE
   async function handleDeleteTweet(tweetId) {
-    console.log('delete')
     if (!tweetId) return
 
     try {
@@ -40,11 +46,46 @@ function TweetMenu({tweet, refetchTweets, setShowTweetMenu, showTweetMenu}) {
       }
 
       console.log('Tweet deleted successfully:', data)
-      refetchTweets()
+
+      if (refetchTweets) {
+        refetchTweets()
+      } else {
+        router.push('/')
+      }
     } catch (error) {
       console.error('Error deleting tweet:', error)
     }
   }
+
+  // EDIT
+  async function handleEditTweet(tweetId, newContent) {
+    if (!tweetId || !newContent) return
+
+    try {
+      const res = await fetch(`http://localhost:3000/api/tweets/${tweetId}`, {
+        method: 'PATCH',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({content: newContent})
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        console.error('Error editing tweet:', data.error)
+        return
+      }
+
+      console.log('Tweet updated successfully:', data)
+      if (refetchTweets) {
+        refetchTweets()
+      } else {
+        router.push('/')
+      }
+    } catch (error) {
+      console.error('Error editing tweet:', error)
+    }
+  }
+
 
   return (
     <div className="relative">
@@ -61,32 +102,46 @@ function TweetMenu({tweet, refetchTweets, setShowTweetMenu, showTweetMenu}) {
 
       {showTweetMenu && <div
         ref={TweetMenuRef}
-        className="absolute mt-2 right-[-4px] border max-w-25 border-gray-700 font-bold text-white bg-[#0a0a0a]  rounded-lg shadow-sm shadow-white/50 z-50"
+        className="absolute right-[-4px] border max-w-25 border-gray-700 font-bold text-white bg-[#0a0a0a]  rounded-lg shadow-sm shadow-white/50 z-50"
       >
         <button
-          className="w-full font-normal text-left px-4 py-1 cursor-pointer text-gray-400 hover:text-white"
+          className="w-full flex items-center gap-2 font-normal text-left px-4 py-1 cursor-pointer text-gray-400 hover:text-white"
           onClick={(e) => {
             e.preventDefault()
             e.stopPropagation()
             console.log('EDIT tweet')
+            setShowEditModal(true)
             setShowTweetMenu(false)
           }}
         >
+          <FaRegEdit />
           Edit
         </button>
         <button
-          className="w-full font-normal text-left px-4 py-1 cursor-pointer text-red-500/70 hover:text-red-500"
+          className="w-full flex items-center gap-2 font-normal text-left px-4 py-1 cursor-pointer text-red-500/70 hover:text-red-500/90"
           onClick={(e) => {
             e.preventDefault()
             e.stopPropagation()
-            handleDeleteTweet(tweet._id)
+            setShowDeleteModal(true)
             setShowTweetMenu(false)
           }}
         >
+          <FaRegTrashAlt />
           Delete
         </button>
       </div>}
 
+      {showDeleteModal &&
+        <DeleteTweetModal
+          onDelete={() => handleDeleteTweet(tweet._id)}
+          setShowDeleteModal={setShowDeleteModal}
+        />}
+
+      {showEditModal && <EditTweetModal
+        tweet={tweet}
+        onEdit={(tweetId, newContent) => handleEditTweet(tweetId, newContent)}
+        setShowEditModal={setShowEditModal}
+      />}
     </div>
   )
 }
